@@ -8,10 +8,10 @@ public class RegexTypeIdentifier implements TypeIdentifier {
 
     @Override
     public Type identify(String value) {
-        if (isFloat(value)){
-            return Type.FLOAT;
-        } else if (isInteger(value)) {
+        if (isInteger(value)){
             return Type.INTEGER;
+        } else if (isFloat(value)) {
+            return Type.FLOAT;
         }
         return Type.STRING;
     }
