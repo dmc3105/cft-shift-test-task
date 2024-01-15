@@ -1,4 +1,4 @@
-package com.dmc3105;
+package com.dmc3105.typeidentifier;
 
 public enum Type {
     NONE,

@@ -1,4 +1,4 @@
-package com.dmc3105;
+package com.dmc3105.typeidentifier;
 
 public class RegexTypeIdentifier implements TypeIdentifier {
     private static final String FLOAT_REGEX = "^[-+]?(\\d*\\.)?\\d+([eE][-+]?\\d+)?$";
