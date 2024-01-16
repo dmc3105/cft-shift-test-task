@@ -25,7 +25,7 @@ public final class NumberStatistics<T extends Number> implements Statistics{
                 String.format("""
                         Минимальное значение: %s
                         Максимальное значение: %s
-                        Сумма всех значенийЖ %s
+                        Сумма всех значений: %s
                         Среднее всех значений: %s""",
                         minValue.toString(), maxValue.toString(),
                         sumOfValues.toString(), averageValue.toString());

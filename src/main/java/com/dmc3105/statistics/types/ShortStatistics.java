@@ -13,7 +13,7 @@ public final class ShortStatistics implements Statistics{
 
     @Override
     public String asString() {
-        return String.format("Количество элементов записанных в файлов: %d", writtenElementsCount);
+        return String.format("Количество элементов записанных в файлы: %d", writtenElementsCount);
     }
 
 
