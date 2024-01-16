@@ -1,4 +1,4 @@
-package com.dmc3105.statistics;
+package com.dmc3105.statistics.types;
 
 public final class StringStatistics implements Statistics{
     private final ShortStatistics shortStatistics;
