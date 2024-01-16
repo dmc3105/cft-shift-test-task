@@ -27,7 +27,7 @@ public class IntegerStatisticsCollector extends ShortStatisticsCollector{
     }
 
     @Override
-    public Statistics getStatistics() {
+    public Statistics getStatistics() throws EmptyStatisticsException{
         ShortStatistics shortStatistics = (ShortStatistics)super.getStatistics();
         return new NumberStatistics<Integer>(
                 shortStatistics,

@@ -27,7 +27,7 @@ public class StringStatisticsCollector extends ShortStatisticsCollector {
     }
 
     @Override
-    public Statistics getStatistics() {
+    public Statistics getStatistics() throws EmptyStatisticsException{
         return new StringStatistics((ShortStatistics)super.getStatistics(), shortestStringLength, longestStringLength);
     }
 
