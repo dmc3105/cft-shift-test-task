@@ -15,4 +15,8 @@ public class ShortStatisticsCollector implements StatisticsCollector{
     public Statistics getStatistics() {
         return new ShortStatistics(writtenElementsCount);
     }
+
+    public int getWrittenElementsCount() {
+        return writtenElementsCount;
+    }
 }
