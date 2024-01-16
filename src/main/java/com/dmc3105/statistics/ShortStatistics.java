@@ -1,7 +1,13 @@
 package com.dmc3105.statistics;
 
-public class ShortStatistics implements Statistics{
-    private int writtenElementsCount;
+public final class ShortStatistics implements Statistics{
+    private final int writtenElementsCount;
+
+
+
+    public ShortStatistics(int writtenElementsCount) {
+        this.writtenElementsCount = writtenElementsCount;
+    }
 
 
 
@@ -12,22 +18,8 @@ public class ShortStatistics implements Statistics{
 
 
 
-    public void addWrittenElementsCount(int value)
+    public int getWrittenElementsCount()
     {
-        if (value <= 0)
-        {
-            throw new IllegalArgumentException("Added value cannot be less or equals 0");
-        }
-        writtenElementsCount +=value;
-    }
-
-    public void incrementWrittenElementsCount(){
-        writtenElementsCount++;
-    }
-
-
-
-    public int getWrittenElementsCount() {
-        return writtenElementsCount;
+        return this.writtenElementsCount;
     }
 }
