@@ -10,7 +10,7 @@ public class ShortStatisticsCollector implements StatisticsCollector {
     @Override
     public void collectStatistics(String value) {
         writtenElementsCount++;
-        isEmpty = true;
+        isEmpty = false;
     }
 
     @Override
