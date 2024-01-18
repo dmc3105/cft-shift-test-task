@@ -7,14 +7,14 @@ import com.dmc3105.typeidentifier.RegexTypeIdentifier;
 import com.dmc3105.typeidentifier.Type;
 import com.dmc3105.typeidentifier.TypeIdentifier;
 
+import java.util.AbstractMap;
+import java.util.Collection;
 import java.util.SortedMap;
 import java.util.TreeMap;
 
 public class ApplicationStatisticsCollector
 {
     private final SortedMap<Type, StatisticsCollector> typeStatisticsCollectorHashMap;
-    private final TypeIdentifier typeIdentifier = new RegexTypeIdentifier();
-
     public ApplicationStatisticsCollector(StatisticsCollectorsFactory factory) {
         typeStatisticsCollectorHashMap = new TreeMap<>();
         typeStatisticsCollectorHashMap.put(Type.FLOAT, factory.createFloatStatisticsCollector());
@@ -22,9 +22,14 @@ public class ApplicationStatisticsCollector
         typeStatisticsCollectorHashMap.put(Type.STRING, factory.createStringStatisticsCollector());
     }
 
-    public void collectStatistics(String value)
+    public void collectStatistics(String value, TypeIdentifier typeIdentifier)
     {
         Type type = typeIdentifier.identify(value);
+        collectStatistics(value, type);
+    }
+
+    public void collectStatistics(String value, Type type)
+    {
         typeStatisticsCollectorHashMap.get(type).collectStatistics(value);
     }
 
