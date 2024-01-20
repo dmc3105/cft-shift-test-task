@@ -11,7 +11,7 @@ public class TypedFilePrinter implements Closeable, AutoCloseable{
     private final String outputFilePrefix;
     private final boolean appendToFiles;
     private final HashMap<Type, String> typeFileNameHashMap;
-    private HashMap<Type, PrintWriter> typePrintWriterMap = new HashMap<>();
+    private final HashMap<Type, PrintWriter> typePrintWriterMap = new HashMap<>();
 
     public TypedFilePrinter(TypedFilePrinterBuilder builder) {
         this.outputDirPath = builder.outputDirPath;
@@ -46,9 +46,10 @@ public class TypedFilePrinter implements Closeable, AutoCloseable{
 
 
     private PrintWriter getPrintWriterByType(Type type) throws FileNotFoundException {
+        new File(outputDirPath).mkdirs();
         if (!typePrintWriterMap.containsKey(type))
         {
-            String fullPath = this.outputDirPath + this.outputFilePrefix + typeFileNameHashMap.get(type);
+            String fullPath = outputDirPath + outputFilePrefix + typeFileNameHashMap.get(type);
             FileOutputStream fos = new FileOutputStream(fullPath, this.appendToFiles);
             typePrintWriterMap.put(type, new PrintWriter(fos));
         }
