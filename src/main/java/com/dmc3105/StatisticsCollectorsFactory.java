@@ -1,9 +1,11 @@
 package com.dmc3105;
 
 import com.dmc3105.statistics.collectors.StatisticsCollector;
+import com.dmc3105.typeidentifier.Type;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public interface StatisticsCollectorsFactory {
-    StatisticsCollector createFloatStatisticsCollector();
-    StatisticsCollector createIntegerStatisticsCollector();
-    StatisticsCollector createStringStatisticsCollector();
+    HashMap<Type,StatisticsCollector> createTypeStatisticsCollectorHashMap();
 }
