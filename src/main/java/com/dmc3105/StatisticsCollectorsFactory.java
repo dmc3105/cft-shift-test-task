@@ -8,4 +8,5 @@ import java.util.Map;
 
 public interface StatisticsCollectorsFactory {
     HashMap<Type,StatisticsCollector> createTypeStatisticsCollectorHashMap();
+    HashMap<Type,String> createTypeStatisticsCollectorNameHashMap();
 }

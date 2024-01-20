@@ -18,4 +18,13 @@ public class FullStatisticsCollectorsFactory implements StatisticsCollectorsFact
         resultHashMap.put(Type.INTEGER, new IntegerStatisticsCollector());
         return resultHashMap;
     }
+
+    @Override
+    public HashMap<Type, String> createTypeStatisticsCollectorNameHashMap() {
+        HashMap<Type,String> resultedHashMap = new HashMap<>();
+        resultedHashMap.put(Type.FLOAT, "Вещественное число");
+        resultedHashMap.put(Type.INTEGER, "Целое число");
+        resultedHashMap.put(Type.STRING, "Строка");
+        return resultedHashMap;
+    }
 }

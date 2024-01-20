@@ -12,9 +12,11 @@ import java.util.HashMap;
 public class ApplicationStatisticsCollector
 {
     private final HashMap<Type, StatisticsCollector> typeStatisticsCollectorHashMap;
+    private final HashMap<Type, String> typeStatisticsCollectorNameHashMap;
 
     public ApplicationStatisticsCollector(StatisticsCollectorsFactory factory) {
         this.typeStatisticsCollectorHashMap = factory.createTypeStatisticsCollectorHashMap();
+        this.typeStatisticsCollectorNameHashMap = factory.createTypeStatisticsCollectorNameHashMap();
     }
 
     //TODO: Поработать с исключениями, а то все печально
@@ -31,14 +33,21 @@ public class ApplicationStatisticsCollector
 
     public void printStatistics() throws EmptyStatisticsException {
         for (var entry : typeStatisticsCollectorHashMap.entrySet()) {
-            System.out.println(entry.getKey());
+            String type = typeStatisticsCollectorNameHashMap.get(entry.getKey());
+            System.out.println(String.format("Статистика по типу \"%s\"", type));
             StatisticsCollector collector = entry.getValue();
             if (!collector.isEmpty()) {
                 Statistics statistics = collector.getStatistics();
                 System.out.println(statistics.asString());
             } else {
-                System.out.println("Статистика по данному типу отсутствует");
+                System.out.println("Статистика отсутствует");
             }
+            System.out.println();
         }
+    }
+
+    private String getNameByType(Type type)
+    {
+        return typeStatisticsCollectorNameHashMap.get(type);
     }
 }
