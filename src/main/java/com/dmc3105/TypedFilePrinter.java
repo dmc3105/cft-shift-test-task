@@ -66,6 +66,10 @@ public class TypedFilePrinter implements Closeable, AutoCloseable{
         private HashMap<Type, String> typeFileNameHashMap = new HashMap<>();
 
         public TypedFilePrinterBuilder setOutputDirPath(String outputDirPath) {
+            if (!outputDirPath.endsWith("/"))
+            {
+                outputDirPath = outputDirPath + "/";
+            }
             this.outputDirPath = outputDirPath;
             return this;
         }
