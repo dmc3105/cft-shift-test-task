@@ -1,6 +1,5 @@
 package com.dmc3105;
 
-import com.dmc3105.statistics.collectors.EmptyStatisticsException;
 import com.dmc3105.typeidentifier.RegexTypeIdentifier;
 import com.dmc3105.typeidentifier.Type;
 import com.dmc3105.typeidentifier.TypeIdentifier;
@@ -12,13 +11,13 @@ import java.util.Collection;
 
 public class App
 {
-    //TODO: Разобраться с исключениями
     public static void main(String[] args) {
         CommandLine cmd = null;
         try {
             cmd = CreateCommandLine(args);
         } catch (ParseException e) {
-            System.out.println("Во время выполнения программы произошла ошибка\n" + e.getMessage());
+            printException(e);
+            System.exit(1);
         }
 
         try (FilesScanner filesScanner = new FilesScanner(cmd.getArgList());
@@ -27,11 +26,17 @@ public class App
 
             while (filesScanner.hasNextLine()) {
                 String line = filesScanner.nextLine();
+                if (line.isEmpty())
+                    continue;
                 Type type = typeIdentifier.identify(line);
                 printer.printByType(line, type);
             }
-        } catch (IOException | IllegalArgumentException e) {
-            System.out.println("Во время выполнения программы произошла ошибка\n" + e.getMessage());
+        } catch (FileNotFoundException e) {
+            printException(e);
+            System.exit(2);
+        } catch (IOException e) {
+            printException(e);
+            System.exit(3);
         }
 
         if (cmd.hasOption("s") || cmd.hasOption("f")) {
@@ -39,11 +44,7 @@ public class App
                     cmd.getArgList(),
                     cmd.hasOption("s"),
                     cmd.hasOption("f"));
-            try {
-                collector.printStatistics();
-            } catch (EmptyStatisticsException e) {
-                throw new RuntimeException(e);
-            }
+            collector.printStatistics();
         }
     }
 
@@ -60,6 +61,8 @@ public class App
             while (scanner.hasNextLine())
             {
                 String line = scanner.nextLine();
+                if (line.isEmpty())
+                    continue;
                 collector.collectStatistics(line, typeIdentifier);
             }
         } catch (IOException e) {
@@ -112,8 +115,13 @@ public class App
         } else if (useFullStatistics) {
             factory = new FullStatisticsCollectorsFactory();
         } else {
-            throw new IllegalArgumentException("Cannot create factory without option");
+            throw new IllegalArgumentException("Cannot create factory without any option");
         }
         return new ApplicationStatisticsCollector(factory);
+    }
+
+    private static void printException(Exception e)
+    {
+        System.out.println("Во время выполнения программы произошла ошибка\n" + e.getMessage());
     }
 }
