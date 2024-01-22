@@ -20,6 +20,11 @@ public class App
             System.exit(1);
         }
 
+        if (cmd.getArgList().isEmpty()) {
+            printException(new FileNotFoundException("No files were passed"));
+            System.exit(2);
+        }
+
         try (FilesScanner filesScanner = new FilesScanner(cmd.getArgList());
              TypedFilePrinter printer = createTypedFilePrinter(cmd)){
             TypeIdentifier typeIdentifier = new RegexTypeIdentifier();
